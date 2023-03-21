@@ -1,0 +1,27 @@
+* {
+    border: 1px solid #000;
+}
+
+.container {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: #7e7e7e9d;
+}
+
+.formCard {
+    display: inline-block;
+    padding: 1rem;
+}
+
+label, input {
+    display: block;
+}
+
+input {
+    margin-bottom: 1rem;
+}
+
+label {
+    text-align: start;
+}
