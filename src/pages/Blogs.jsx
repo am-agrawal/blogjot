@@ -20,7 +20,7 @@ const Blogs = () => {
 
   const logout = () => {
     localStorage.clear();
-    navigate("/", { replace: true});
+    navigate("/", { replace: true });
   };
 
   const handleShowModal = (e) => {
@@ -29,8 +29,8 @@ const Blogs = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem('isLoggedIn') == false) {
-      navigate("/", { replace: true});
+    if (localStorage.getItem("isLoggedIn") == false) {
+      navigate("/", { replace: true });
     }
 
     dispatch(clearBlogs());
@@ -66,33 +66,14 @@ const Blogs = () => {
   return (
     <div>
       <div className={style.bar}>
-        <div className={style.name}>Welcome {localStorage.getItem("name")}</div>
+        <h2>BlogJot</h2>
         <button type="button" className={style.btnLogout} onClick={logout}>
           Logout
         </button>
       </div>
-
-      {isEditor === true && (
-        <div className={style.btnsForEditor}>
-          {allBlogs.length > 0 ? (
-            <div>
-              <button
-                type="button"
-                className={showMyBlogs === false ? style.btnActive : style.btn}
-                onClick={() => setShowMyBlogs(false)}
-              >
-                All Blogs
-              </button>
-              <button
-                type="button"
-                className={showMyBlogs === true ? style.btnActive : style.btn}
-                onClick={() => setShowMyBlogs(true)}
-              >
-                My Blogs
-              </button>
-            </div>
-          ) : <div>No Blog is posted yet</div>}
-
+      <div className={style.bar}>
+        <div className={style.name}>Welcome {localStorage.getItem("name")}</div>
+        {isEditor === true && (
           <button
             type="button"
             className={style.btnCreate}
@@ -100,7 +81,28 @@ const Blogs = () => {
           >
             Create
           </button>
+        )}
+      </div>
+
+      {isEditor === true && allBlogs.length > 0 ? (
+        <div className={style.btnsForEditor}>
+          <button
+            type="button"
+            className={showMyBlogs === false ? style.btnActive : style.btn}
+            onClick={() => setShowMyBlogs(false)}
+          >
+            All Blogs
+          </button>
+          <button
+            type="button"
+            className={showMyBlogs === true ? style.btnActive : style.btn}
+            onClick={() => setShowMyBlogs(true)}
+          >
+            My Blogs
+          </button>
         </div>
+      ) : (
+        <div>No Blog is posted yet</div>
       )}
 
       <BlogsCard showMyBlogs={showMyBlogs} />
