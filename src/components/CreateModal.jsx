@@ -77,9 +77,11 @@ const CreateModal = ({
         <input
           type="text"
           name="title"
+          id="title"
           onChange={(e) => setTitle(e.target.value)}
           value={title}
           className={style.title}
+          placeholder='Title'
         />
 
         <label htmlFor="body" className={style.labelBody}>
@@ -87,10 +89,12 @@ const CreateModal = ({
         </label>
         <textarea
           name="body"
+          id="body"
           rows="10"
           onChange={(e) => setBody(e.target.value)}
           value={body}
           className={style.body}
+          placeholder='Type here'
         ></textarea>
 
         <button type="submit" className={style.btnSubmit}>

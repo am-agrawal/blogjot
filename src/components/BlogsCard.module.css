@@ -1,0 +1,11 @@
+.blogsCard {
+  padding: 1rem;
+  background-color: #4D4D4D;
+  border-radius: 1rem;
+}
+
+.noBlog {
+  font-size: 18pt;
+  font-weight: 600;
+  color: #fff;
+}

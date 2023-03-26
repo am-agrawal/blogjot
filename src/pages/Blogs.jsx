@@ -7,16 +7,41 @@ import { useNavigate } from "react-router-dom";
 import { setEditor } from "../store/usersSlice";
 import BlogsCard from "../components/BlogsCard";
 import CreateModal from "../components/CreateModal";
+import SearchResult from "../components/SearchResult";
 
 const Blogs = () => {
   const editors = useSelector((state) => state.users.editors);
   const isEditor = useSelector((state) => state.users.isEditor);
-  const allBlogs = useSelector((state) => state.blogs.allBlogs);
+
+  const allBlogs = useSelector(state => state.blogs.allBlogs);
+  const myBlogs = useSelector(state => state.blogs.myBlogs);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [showMyBlogs, setShowMyBlogs] = useState(false);
   const [showModal, setShowModal] = useState(false);
+
+  const [searchText, setSearchText] = useState("");
+  const [showSearchResults, setShowSearchResults] = useState(false);
+  const [searchResult, setSearchResult] = useState([]);
+
+  const handleSearch = (e) => {
+    setSearchText(e.target.value);
+    if(searchText.trim() !== '') {
+      let result = (showMyBlogs === true ? myBlogs : allBlogs).map(blog => {
+        if(blog.title.search(searchText) !== -1) {
+          return blog;
+        }
+        return null;
+      })
+      result = result.filter(blog => blog !== null);
+      setSearchResult(result);
+      setShowSearchResults(true);
+    } else {
+      setShowSearchResults(false);
+    }
+  };
 
   const logout = () => {
     localStorage.clear();
@@ -83,29 +108,37 @@ const Blogs = () => {
           </button>
         )}
       </div>
-
-      {isEditor === true && allBlogs.length > 0 ? (
-        <div className={style.btnsForEditor}>
-          <button
-            type="button"
-            className={showMyBlogs === false ? style.btnActive : style.btn}
-            onClick={() => setShowMyBlogs(false)}
-          >
-            All Blogs
-          </button>
-          <button
-            type="button"
-            className={showMyBlogs === true ? style.btnActive : style.btn}
-            onClick={() => setShowMyBlogs(true)}
-          >
-            My Blogs
-          </button>
+      <div className={style.btnsForEditor}>
+        {isEditor === true && (
+          <div>
+            <button
+              type="button"
+              className={showMyBlogs === false ? style.btnActive : style.btn}
+              onClick={() => setShowMyBlogs(false)}
+            >
+              All Blogs
+            </button>
+            <button
+              type="button"
+              className={showMyBlogs === true ? style.btnActive : style.btn}
+              onClick={() => setShowMyBlogs(true)}
+            >
+              My Blogs
+            </button>
+          </div>
+        )}
+        <div className={style.searchBox}>
+          <input
+            type="text"
+            onChange={handleSearch}
+            value={searchText}
+            placeholder="&#128269; Search"
+            className={style.search}
+          />
         </div>
-      ) : (
-        <div>No Blog is posted yet</div>
-      )}
+      </div>
 
-      <BlogsCard showMyBlogs={showMyBlogs} />
+      {showSearchResults === false ? <BlogsCard showMyBlogs={showMyBlogs} /> : <SearchResult blogs={searchResult} />}
       {showModal && <CreateModal handleShowModal={handleShowModal} />}
     </div>
   );

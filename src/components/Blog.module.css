@@ -7,6 +7,7 @@
   justify-content: space-between;
   padding: 0.8rem;
   gap: 1rem;
+  background-color: #fff;
 }
 
 .content {
@@ -19,11 +20,17 @@
 }
 
 .btns button:nth-child(1) {
-  background: #a6e4f0;
+  background-color: #ffa470;
+  color: #fff;
+  font-weight: 700;
+  font-size: 12pt;
 }
 
 .btns button:nth-child(2) {
-  background: #f0a6a6;
+  background-color: #B46060;
+  color: #fff;
+  font-weight: 700;
+  font-size: 12pt;
 }
 
 .btnReadMore {

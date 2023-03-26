@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isEditor: false,
-  // allUsers: [449501],
+  // allUsers: [449501, 485070],
   editors: [449501],
 };
 
