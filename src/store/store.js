@@ -1,19 +1,13 @@
-import { createStore } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
+import blogsReducer from "./blogsSlice";
+import thunk from "redux-thunk";
+import logger from "redux-logger";
+import usersReducer from "./usersSlice";
 
-const initialState = {
-  username: null,
-  blogs: [],
-  myBlogs: [],
-};
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case "login":
-      return {};
-    default:
-      return state;
-  }
-};
-
-const store = createStore(reducer);
-
-export default store;
+export default configureStore({
+  reducer: {
+    blogs: blogsReducer,
+    users: usersReducer
+  },
+  middleware: [thunk, logger]
+});
