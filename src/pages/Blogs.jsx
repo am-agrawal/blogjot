@@ -20,7 +20,7 @@ const Blogs = () => {
 
   const logout = () => {
     localStorage.clear();
-    navigate("/");
+    navigate("/", { replace: true});
   };
 
   const handleShowModal = (e) => {
@@ -30,7 +30,7 @@ const Blogs = () => {
 
   useEffect(() => {
     if (localStorage.getItem('isLoggedIn') == false) {
-      navigate("/");
+      navigate("/", { replace: true});
     }
 
     dispatch(clearBlogs());

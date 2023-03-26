@@ -40,7 +40,7 @@ const Login = () => {
         localStorage.setItem("name", fetchedUser.name);
 
         localStorage.setItem('isLoggedIn', true);
-        navigate("/blogs");
+        navigate("/blogs", { replace: true});
       } else {
         alert("Entered details are invalid");
       }
@@ -49,7 +49,7 @@ const Login = () => {
 
   useEffect(() => {
     if (localStorage.getItem('isLoggedIn')) {
-      navigate("/blogs");
+      navigate("/blogs", { replace: true});
     }
   }, [navigate]);
 

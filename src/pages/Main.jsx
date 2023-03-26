@@ -27,18 +27,20 @@ const Main = () => {
           fetchedUser.email === localStorage.getItem("username")
         ) {
           localStorage.setItem('isLoggedIn', true);
+        } else {
+          alert('Something went wrong!!!');
         }
       }
 
       if (localStorage.getItem('isLoggedIn') === true) {
-        navigate("/blogs");
+        navigate("/blogs", { replace: true});
       } else {
-        navigate("/login");
+        navigate("/login", { replace: true});
       }
     })();
   }, [navigate]);
 
-  return <div>Loading...</div>;
+  return <div></div>;
 };
 
 export default Main;
