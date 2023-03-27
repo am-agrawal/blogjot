@@ -7,7 +7,6 @@ const Main = () => {
 
   useEffect(() => {
     (async () => {
-      //! Remove this 'if' and handle error of api call
       if (localStorage.getItem("id") && localStorage.getItem("username")) {
         let fetchedUser = null;
         try {

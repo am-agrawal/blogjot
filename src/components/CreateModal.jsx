@@ -71,31 +71,34 @@ const CreateModal = ({
         onClick={(e) => e.stopPropagation()}
         className={style.formCard}
       >
-        <label htmlFor="title" className={style.labelTitle}>
-          Title
-        </label>
-        <input
-          type="text"
-          name="title"
-          id="title"
-          onChange={(e) => setTitle(e.target.value)}
-          value={title}
-          className={style.title}
-          placeholder='Title'
-        />
+        <div>
+          <label htmlFor="title" className={style.labelTitle}>
+            Title
+          </label>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
+            className={style.title}
+            placeholder="Title"
+          />
+        </div>
 
-        <label htmlFor="body" className={style.labelBody}>
-          Body
-        </label>
-        <textarea
-          name="body"
-          id="body"
-          rows="10"
-          onChange={(e) => setBody(e.target.value)}
-          value={body}
-          className={style.body}
-          placeholder='Type here'
-        ></textarea>
+        <div>
+          <label htmlFor="body" className={style.labelBody}>
+            Body
+          </label>
+          <textarea
+            name="body"
+            id="body"
+            onChange={(e) => setBody(e.target.value)}
+            value={body}
+            className={style.body}
+            placeholder="Type here"
+          ></textarea>
+        </div>
 
         <button type="submit" className={style.btnSubmit}>
           {id === null ? "Publish" : "Update"}

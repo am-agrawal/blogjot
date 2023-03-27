@@ -13,8 +13,8 @@ const Blogs = () => {
   const editors = useSelector((state) => state.users.editors);
   const isEditor = useSelector((state) => state.users.isEditor);
 
-  const allBlogs = useSelector(state => state.blogs.allBlogs);
-  const myBlogs = useSelector(state => state.blogs.myBlogs);
+  const allBlogs = useSelector((state) => state.blogs.allBlogs);
+  const myBlogs = useSelector((state) => state.blogs.myBlogs);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -28,14 +28,14 @@ const Blogs = () => {
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
-    if(searchText.trim() !== '') {
-      let result = (showMyBlogs === true ? myBlogs : allBlogs).map(blog => {
-        if(blog.title.search(searchText) !== -1) {
+    if (searchText.trim() !== "") {
+      let result = (showMyBlogs === true ? myBlogs : allBlogs).map((blog) => {
+        if (blog.title.search(searchText) !== -1) {
           return blog;
         }
         return null;
-      })
-      result = result.filter(blog => blog !== null);
+      });
+      result = result.filter((blog) => blog !== null);
       setSearchResult(result);
       setShowSearchResults(true);
     } else {
@@ -95,6 +95,25 @@ const Blogs = () => {
         <h2>BlogJot</h2>
         <button type="button" className={style.btnLogout} onClick={logout}>
           Logout
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            // width="16"
+            // height="16"
+            width="20"
+            height="20"
+            fill="currentColor"
+            class="bi bi-box-arrow-right"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"
+            />
+            <path
+              fill-rule="evenodd"
+              d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"
+            />
+          </svg>
         </button>
       </div>
       <div className={style.bar}>
@@ -105,7 +124,18 @@ const Blogs = () => {
             className={style.btnCreate}
             onClick={handleShowModal}
           >
-            Create
+            New
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="currentColor"
+              class="bi bi-plus-circle"
+              viewBox="0 0 16 16"
+            >
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+            </svg>
           </button>
         )}
       </div>
@@ -133,13 +163,17 @@ const Blogs = () => {
             type="text"
             onChange={handleSearch}
             value={searchText}
-            placeholder="&#128269; Search"
+            placeholder="Search"
             className={style.search}
           />
         </div>
       </div>
 
-      {showSearchResults === false ? <BlogsCard showMyBlogs={showMyBlogs} /> : <SearchResult blogs={searchResult} />}
+      {showSearchResults === false ? (
+        <BlogsCard showMyBlogs={showMyBlogs} />
+      ) : (
+        <SearchResult blogs={searchResult} />
+      )}
       {showModal && <CreateModal handleShowModal={handleShowModal} />}
     </div>
   );
