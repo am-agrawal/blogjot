@@ -26,36 +26,39 @@ const Login = () => {
 
     (async () => {
       let fetchedUser = null;
-      const response = await api.get(`/users/${passwordRef.current.value}`);
+      try {
+        const response = await api.get(`/users/${passwordRef.current.value}`);
+        fetchedUser = response.data && response.data;
+      } catch (error) {
+        // console.error(error);
+        if (error.message === "Request failed with status code 404") {
+          alert("Password is incorrect");
+        }
+      }
+      if (fetchedUser && fetchedUser.email) {
+        if (fetchedUser.email === userRef.current.value) {
+          localStorage.setItem("username", fetchedUser.email);
+          localStorage.setItem("id", fetchedUser.id);
+          localStorage.setItem("name", fetchedUser.name);
 
-      fetchedUser = response.data && response.data;
-
-      if (
-        fetchedUser &&
-        fetchedUser.email &&
-        fetchedUser.email === userRef.current.value
-      ) {
-        localStorage.setItem("username", fetchedUser.email);
-        localStorage.setItem("id", fetchedUser.id);
-        localStorage.setItem("name", fetchedUser.name);
-
-        localStorage.setItem('isLoggedIn', true);
-        navigate("/blogs", { replace: true});
-      } else {
-        alert("Entered details are invalid");
+          localStorage.setItem("isLoggedIn", true);
+          navigate("/blogs", { replace: true });
+        } else {
+          alert('Username is incorrect');
+        }
       }
     })();
   };
 
   useEffect(() => {
-    if (localStorage.getItem('isLoggedIn')) {
-      navigate("/blogs", { replace: true});
+    if (localStorage.getItem("isLoggedIn")) {
+      navigate("/blogs", { replace: true });
     }
   }, [navigate]);
 
   return (
     <div className={style.container}>
-      <h1>Welcome to BlogJot</h1>
+      <h1 className={style.greetText}>Welcome to BlogJot</h1>
       <form className={style.formCard} onSubmit={submit}>
         <label htmlFor="username">Username</label>
         <input
@@ -75,7 +78,9 @@ const Login = () => {
           ref={passwordRef}
         />
 
-        <button type="submit" className={style.btnLogin}>Login</button>
+        <button type="submit" className={style.btnLogin}>
+          Login
+        </button>
       </form>
     </div>
   );

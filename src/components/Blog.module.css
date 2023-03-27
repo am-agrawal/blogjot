@@ -7,7 +7,7 @@
   justify-content: space-between;
   padding: 0.8rem;
   gap: 1rem;
-  background-color: #fff;
+  background-color: #f8f6e5;
 }
 
 .content {
@@ -45,4 +45,10 @@
 
 .btnReadMore:hover {
   text-decoration: underline;
+}
+
+.title {
+  font-size: 15pt;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
 }

@@ -8,15 +8,15 @@ const Main = () => {
   useEffect(() => {
     (async () => {
       //! Remove this 'if' and handle error of api call
-      if (localStorage.getItem("id") && localStorage.getItem('username')) {
+      if (localStorage.getItem("id") && localStorage.getItem("username")) {
         let fetchedUser = null;
         try {
           const response = await api.get(
             `/users/${localStorage.getItem("id")}`
           );
-
           fetchedUser = response.data;
         } catch (error) {
+          alert("Username or Password is incorrect");
           console.error(error.message);
         }
 
@@ -26,16 +26,17 @@ const Main = () => {
           fetchedUser.email &&
           fetchedUser.email === localStorage.getItem("username")
         ) {
-          localStorage.setItem('isLoggedIn', true);
+          localStorage.setItem("isLoggedIn", true);
         } else {
-          alert('Something went wrong!!!');
+          localStorage.clear();
+          alert("Something went wrong!!!");
         }
       }
 
-      if (localStorage.getItem('isLoggedIn') === true) {
-        navigate("/blogs", { replace: true});
+      if (localStorage.getItem("isLoggedIn") === true) {
+        navigate("/blogs", { replace: true });
       } else {
-        navigate("/login", { replace: true});
+        navigate("/login", { replace: true });
       }
     })();
   }, [navigate]);

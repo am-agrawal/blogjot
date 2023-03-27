@@ -34,7 +34,7 @@ const Blog = ({ blog, showMyBlogs }) => {
   return (
     <div className={style.card}>
       <div className={style.content}>
-        <h3>{blog.title}</h3>
+        <h3 className={style.title}>{blog.title}</h3>
         <div>
           {blog.body.length > 200 ? (
             <p>

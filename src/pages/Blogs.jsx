@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setBlogs, setMyBlogs, clearBlogs } from "../store/blogsSlice";
 import api from "../apis/api";
 import { useNavigate } from "react-router-dom";
-import { setEditor } from "../store/usersSlice";
+import { setEditor, resetEditor } from "../store/usersSlice";
 import BlogsCard from "../components/BlogsCard";
 import CreateModal from "../components/CreateModal";
 import SearchResult from "../components/SearchResult";
@@ -45,6 +45,7 @@ const Blogs = () => {
 
   const logout = () => {
     localStorage.clear();
+    dispatch(resetEditor());
     navigate("/", { replace: true });
   };
 
